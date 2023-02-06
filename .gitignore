@@ -92,4 +92,4 @@ _trial_temp/
 
 .env
 .venv
-
+infra_service_account.json

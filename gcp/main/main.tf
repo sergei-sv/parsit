@@ -110,7 +110,6 @@ resource "google_sql_user" "user" {
 
 #          Cloud Run              #
 resource "google_cloud_run_service" "buycheaper" {
-  count = var.first_time ? 0 : 1
   name     = var.service
   location = var.region
   template {
@@ -175,13 +174,12 @@ data "google_iam_policy" "noauth" {
 
 # Apply the no-authentication policy to our Cloud Run Service.
 resource "google_cloud_run_service_iam_policy" "noauth" {
-  count = var.first_time ? 0 : 1
   location    = var.region
   project     = var.project_id
-  service     = google_cloud_run_service.buycheaper[0].name
+  service     = google_cloud_run_service.buycheaper.name
   policy_data = data.google_iam_policy.noauth.policy_data
 }
 
 output "cloud_run_instance_url" {
-  value = var.first_time ? null : google_cloud_run_service.buycheaper[0].status.0.url
+  value = google_cloud_run_service.buycheaper.status[0].url
 }

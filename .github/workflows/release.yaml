@@ -34,5 +34,14 @@ jobs:
       - name: Push to Google Container Registry
         run:  docker push europe-north1-docker.pkg.dev/crucial-runner-370615/docker-repo/t-bot:${RELEASE_VERSION}
         env:
-            RELEASE_VERSION: ${{ steps.vars.outputs.tag }}      
+            RELEASE_VERSION: ${{ steps.vars.outputs.tag }}    
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: buycheaper-bot
+          image: europe-north1-docker.pkg.dev/crucial-runner-370615/docker-repo/t-bot:${RELEASE_VERSION}
+        env:
+            RELEASE_VERSION: ${{ steps.vars.outputs.tag }}              
     
