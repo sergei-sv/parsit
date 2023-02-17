@@ -117,6 +117,9 @@ resource "google_cloud_run_service" "buycheaper" {
         service_account_name = google_service_account.botservice.email
         containers {
             image = "europe-north1-docker.pkg.dev/${var.project_id}/${var.repository}/${var.docker_image}"
+            ports {
+              container_port = 6800
+            } 
             env {
               name  = "DB_USERNAME"
               value = google_sql_user.user.name
