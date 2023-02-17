@@ -35,7 +35,7 @@ jobs:
             RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
 
       - name: Push to Google Container Registry
-        run:  docker push europe-north1-docker.pkg.dev/crucial-runner-370615/docker-repo/t-bot:${RELEASE_VERSION}
+        run:  docker push  -a europe-north1-docker.pkg.dev/crucial-runner-370615/docker-repo/t-bot:${RELEASE_VERSION}
         env:
             RELEASE_VERSION: ${{ steps.vars.outputs.tag }}    
 
@@ -45,6 +45,7 @@ jobs:
         with:
           service: buycheaper-bot
           region: europe-north1
+          project: crucial-runner-370615
           image: europe-north1-docker.pkg.dev/crucial-runner-370615/docker-repo/t-bot:${RELEASE_VERSION}
         env:
             RELEASE_VERSION: ${{ steps.vars.outputs.tag }}              
