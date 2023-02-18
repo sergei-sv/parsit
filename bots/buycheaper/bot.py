@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 
 load_dotenv()
-API_TOKEN = os.getenv('BUYCHEAPER')
+API_TOKEN = 5550623930:AAGY3AjL855emSHFWp3LLTYU8TfvzaizShc
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
