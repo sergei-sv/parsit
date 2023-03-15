@@ -46,7 +46,7 @@ jobs:
       run: scp sergei@104.154.203.42:/home/sergei/app/docker-compose.yml .
 
     - name: Update Docker Compose file with latest image
-      run: sed -i "s/image: test:v[0-9].[0-9].[0-9]/image: test:v${{ steps.tag_version.outputs.new_tag }}/g" docker-compose.yml
+      run: sed -i "s/image: test:v[0-9]\.[0-9]\.[0-9]/image: test:v${{ steps.tag_version.outputs.new_tag }}/g" docker-compose.yml
 
     - name: Deploy application with Docker Compose
       run: ssh -o StrictHostKeyChecking=no sergei@104.154.203.42 "cd /home/sergei/app && docker-compose pull && docker-compose up -d"      
